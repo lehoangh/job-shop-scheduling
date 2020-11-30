@@ -13,11 +13,17 @@ import os
 
 def read_data():
     """ Read data file """
-    file_name = "job3_machine2_ds1"
+    # file_name = "job3_machine2_ds1"
     # file_name = "job3_machine2_ds2"
     # file_name = "job7_machine3_ds1"
+    # file_name = "job7_machine3_ds2"
     # file_name = "job8_machine8_ds1"
-    # file_name = "job20_machine5_ds1"
+    # file_name = "job12_machine3_ds1"
+    # file_name = "job12_machine3_ds2"
+    # file_name = "job15_machine5_ds1"
+    # file_name = "job15_machine5_ds2"
+    file_name = "job20_machine5_ds1"
+    # file_name = "job20_machine5_ds2"
     
     input_file = os.getcwd() + "/data/" + file_name
     
@@ -45,9 +51,10 @@ def read_data():
     print("processing time:", process_intervals)
     print("release time:", request_times)
     print("due time:", due_times)
-    
+
     return file_name, job_num, machine_num, processing_cost, process_intervals, \
             request_times, due_times
+
 
 if __name__ == "__main__":
     read_data()

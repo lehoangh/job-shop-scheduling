@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyman
+logs/
+gurobi-jss.log_*_*
+job-shop-scheduling/
+*log
+*lp
+.idea/

@@ -48,6 +48,7 @@ class SSJSP_Gurobi(object):
             if model.status == grb.GRB.Status.OPTIMAL:
                 solved = True
                 print("Optimal Schedule Cost: %i" % model.objVal)
+                model.printStats()
                 self._formulate_schedules(machine_num, job_ids, request_times, due_times, process_intervals, 
                                           processing_cost, assign, sequence, start_time)
             else:
@@ -120,4 +121,3 @@ if __name__ == '__main__':
         job_dict = formulate_jobs_dict(job_ids, request_times, process_intervals)
         gantt_chart_plot(job_dict, ssjsp_solver.schedules, processing_cost, "Gurobi Solver for original problem")
         plt.show()
-        

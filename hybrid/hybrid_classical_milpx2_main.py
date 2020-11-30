@@ -24,9 +24,8 @@ import numpy as np
 import gurobipy as grb
 from read_data import read_data
 from hybrid.hybrid_relaxed_milp import _create_milp_model
-from hybrid.hybrid_cp_solver import _create_cp_model
 # from hybrid.hybrid_milp_solver import _create_model
-from gantt_plot import gantt_chart_plot, formulate_jobs_dict, formulate_sequence_dict
+from gantt_plot import gantt_chart_plot, formulate_jobs_dict
 import matplotlib.pyplot as plt
 
 
@@ -106,6 +105,7 @@ class SSJSP_Hybrid(object):
                         """ Feasible """
                         solved = True
                         print("Optimal Schedule Cost: %i" % milp_model.objVal)
+                        milp_model.printStats()
                         self._formulate_schedules(all_machines, job_ids, request_times, due_times, 
                                                   process_intervals, assign, next_sequence, next_ts)
                 else:
@@ -127,7 +127,7 @@ class SSJSP_Hybrid(object):
                                                            p_intervals, assign, start_time)
         
         """ Write a log file, cannot call in main() function """
-        output_file = os.getcwd() + "/logs/hybrid/hybrid-jss-milp-milp-" + file_name + ".log"
+        output_file = os.getcwd() + "/logs/hybrid/2nd/hybrid-jss-milp-milp-" + file_name + ".log"
         model.setParam(grb.GRB.Param.LogFile, output_file)
         
         return model, next_sequence, next_ts
@@ -257,5 +257,5 @@ if __name__ == '__main__':
         print("Sequence after sorted by increasing start time: ", ssjsp_solver.sequence)
         
         job_dict = formulate_jobs_dict(job_ids, request_times, process_intervals)
-        gantt_chart_plot(job_dict, ssjsp_solver.schedules, processing_cost, "Hybrid Strategy of MILP and CP")
+        gantt_chart_plot(job_dict, ssjsp_solver.schedules, processing_cost, "Hybrid Strategy of MILP and MILP")
         plt.show()

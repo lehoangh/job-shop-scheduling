@@ -68,6 +68,7 @@ class SSJSP_Hybrid(object):
                         print(res.get_solve_status())
                         solved = True
                         print("Optimal Schedule Cost: %i" % milp_model.objVal)
+                        milp_model.printStats()
                         sequence = formulate_sequence_dict(all_jobs, all_machines, assign, res, cp_start_time)
                         self._formulate_schedules(all_machines, job_ids, request_times, due_times, process_intervals, 
                                                   assign, sequence, start_time)
